@@ -1,0 +1,9 @@
+<Files "db.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<Files "url.php">
+    Order Allow,Deny
+    Deny from all
+</Files>

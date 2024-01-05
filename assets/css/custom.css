@@ -1,0 +1,323 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500;700&family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
+/* * {
+    font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+} */
+body {
+    background: url('../img/bg-body.jpg') center/cover no-repeat fixed; /* Arka plan olarak kullanmak istediğiniz resmin URL'sini buraya ekleyin */
+    background-attachment: fixed;
+    font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+.btn:hover{
+    background-color: #3d3d3d !important;
+    color: #fff!important;
+}
+a:hover{
+    cursor: pointer;
+}
+.k-slogan {
+    bottom: 50%;
+    transform: translateY(50%);
+}
+.k-slogan h4{
+    color: #25D366;
+}
+
+.k-slogan .divider {
+    border: none;
+}
+.divider .divider-light{
+    border: none;
+}
+.k-slider-h1{
+    text-align: start;
+    font-size: 5.5rem;
+    font-family: Poppins;
+    font-weight: 700;
+}
+.k-slider-btn{
+    border-radius: 10px;
+    font-size: 25px;
+    font-family: Poppins;
+    font-weight: 700;
+    background-color: #e42d2d;
+    color: #fff;
+    padding: 0.8rem 1.2rem;
+}
+.k-slider-btn:hover{
+    background-color: #fff !important;
+    color: #00a650 !important;
+    box-shadow: 0px 0px 43px 36px rgba(47, 163, 24, 0.3);
+}
+
+
+.nav-link{
+    font-size: 15px !important;
+    text-transform: uppercase;
+    font-weight: 300;
+    letter-spacing: 1.1px;
+    font-weight: 300 !important;
+}
+
+.k-nav-image {
+    height: 250px;
+    /* Div yüksekliği */
+    width: 100%;
+    /* Genişlik, istediğiniz gibi ayarlayabilirsiniz */
+    overflow: hidden;
+    position: relative;
+    background-image: url('../img/page-title-img.jpg');
+    /* Arka plan görüntüsü belirliyoruz */
+    background-size: cover;
+    /* Görüntüyü div'e sığdırıyoruz */
+    background-position: center;
+    /* Görüntünün ortalanmasını sağlıyoruz */
+}
+
+.k-nav-image h1 {
+    color: #ffffffc4;
+}
+
+.k-about-magaza {
+    background-image: url("../img/magaza-section-img.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+.bg-primary {
+    background-color: #39443c !important;
+}
+
+a:hover {
+    color: #00a650 !important;
+}
+
+.btn-primary {
+    background-color: #39443c !important;
+}
+
+hr.divider {
+    background-color: #39443c !important;
+}
+
+p {
+    color: #777777 !important;
+}
+.socialbar{
+    font-family:Open Sans;
+    font-weight: 300;
+    height: 60px;
+    padding: 0 2rem;
+    background-color: #020e28;
+    color: #fff;
+    font-size: 14px;
+}
+.socialbar a{
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 1s ease;
+}
+.socialbar a:hover{
+    color: #e42d2d !important;
+   
+}
+
+
+.k-h1 {
+    position: relative;
+    text-align: center;
+    font-weight: bold;
+    font-size: 3rem;
+    color: #39443c;
+}
+
+.k-h1:before {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 3px;
+    width: 100px;
+    background-color: #39443c;
+
+}
+.gallery a img {
+    transition: transform 0.3s ease;
+}
+
+.gallery a:hover img{
+    transform:scale(1.1);
+}
+.k-wp-btn{
+    padding: 40px;
+    display: inline;
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    background-color: #25D366;
+    border-radius: 50%;
+    z-index: 3;
+}
+.k-wp-btn i{
+    font-size: 2.4rem;
+    color: #ffffffda;
+}
+.k-belgelerimiz-circle{
+    
+    background-color: #39443c;
+    border-radius: 50%;
+}
+.k-belgelerimiz-circle i{
+    font-size: 4rem;
+    color: #e42d2d;
+}
+
+.kare-div {
+    padding-bottom: 100%; 
+    background-color: #3d3d3d; 
+    position: relative;
+    text-align: center; 
+    border-radius: 10px;
+}
+
+.kare-div i {
+    font-size: 4rem;
+    color: #e42d2d;
+}
+.kare-div .kare-div-content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.carousel-item {
+    
+    max-height: 94.5vh;
+    overflow: hidden;
+ }
+
+.circle-div {
+    width: 100%; /* Ebeveyn div olan col-lg-5'in genişliğine sığacak şekilde genişlik ayarla */
+    padding-top: 100%; /* Genişliğin yüzde 100'ü kadar yükseklik oluşturarak 1:1 oran elde et */
+    position: relative; /* İçerik pozisyonunu belirlemek için */
+    border-radius: 50%; /* Yuvarlak kenarlar oluştur */
+    overflow: hidden; /* İçerikten taşan kısımları gizle */
+}
+.circle-div img {
+    width: 100%; /* Resmi içeriğe sığacak şekilde genişlet */
+    height: 100%; /* 1:1 oranını korumak için yüksekliği genişlikle aynı yap */
+    object-fit: cover; /* Resmi 1:1 oranında içerik alanına sığacak şekilde ölçeklendir */
+    position: absolute; /* Mutlaka pozisyonunu belirle */
+    top: 0; /* Üstten hizala */
+    left: 0; /* Soldan hizala */
+}
+@media (max-width: 991px) {
+    .fixed-top{
+        position:relative !important;
+    }
+}
+
+@media (max-width: 540px) {
+    .k-slider-h1{
+        font-size: 1.2rem;
+    }
+    .k-slider-btn{
+        padding: 0.6rem 1.10rem;
+        font-size: 0.7rem;
+    }
+    .kare-div-content i{
+        font-size: 2.2rem;
+    }
+    .kare-div-content h4{
+        font-size: 1rem;
+    }
+    .k-h1{
+        font-size: 2rem;
+    }
+}
+
+/* @media (max-width: 720px) {
+    .k-slider-h1{
+        font-size: 1.2rem;
+    }
+    .k-slider-btn{
+        padding: 0.6rem 1.10rem;
+        font-size: 0.7rem;
+    }
+} */
+
+
+
+/* OWL CAROUSEL ayarları */
+.owl-prev,
+.owl-next {
+    background-color: #d1d1d1 !important;
+    border-radius: 50% !important;
+    color: #fff !important;
+    width: 50px !important;
+    height: 50px !important;
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 1000 !important;
+}
+
+.owl-prev {
+    left: -15px;
+    /* Sol düğmenin konumu */
+}
+
+.owl-next {
+    right: -15px;
+    /* Sağ düğmenin konumu */
+}
+
+.owl-stage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.owl-item {
+    width: 200px;
+    /* Carousel içeriğinin genişliği */
+}
+
+.owl-prev:before,
+.owl-next:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+}
+
+.owl-prev:before {
+    content: "\f053";
+    /* Font Awesome'de sol ok simgesi */
+}
+
+.owl-next:before {
+    content: "\f054";
+    /* Font Awesome'de sağ ok simgesi */
+}
+
+.owl-prev span,
+.owl-next span {
+    display: none;
+}
+
+@media (max-width: 540px) {
+    .owl-prev {
+        left: 0;
+        /* Sol düğmenin konumu */
+    }
+
+    .owl-next {
+        right: 0;
+        /* Sağ düğmenin konumu */
+    }
+
+}
