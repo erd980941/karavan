@@ -1,18 +1,24 @@
 <?php include 'views/header.php' ?>
 <?php include 'views/navbar.php' ?>
 <?php include 'business/user-information.response.php' ?>
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
 
-<section class="container mt-4" id="home-products">
-<ul id="breadcrumb">
-        <li><a href="/"><i class="fa-solid fa-house"></i></a></li>
-        <li><a href="./"><i class="fa-solid fa-shop"></i> Mağaza</a></li>
-        <li><a href="kullanici-bilgilerim"><i class="fas fa-user"></i></i> Profil</a></li>
-    </ul>
-    <div class="row mt-4">
-        <div class="col-lg-3">
+        <ol>
+            <li><a href="./">Anasayfa</a></li>
+            <li><a href="./kullanici-bilglerim">Profil</a></li>
+        </ol>
+        <h2>Profil</h2>
+
+    </div>
+</section>
+<section class="container" id="home-products">
+
+    <div class="row ">
+        <div class="col-lg-3"  data-aos="fade-right">
             <?php include 'views/profil-side-menu.php' ?>
         </div>
-        <div class="col-lg-9 mt-4 mt-lg-0">
+        <div class="col-lg-9 mt-4 mt-lg-0" data-aos="fade-left">
             <div class="row">
 
                 <div class="col-12 mb-3">
@@ -23,27 +29,27 @@
                                 eius earum quod in culpa corporis reprehenderit? Iste magni eligendi consequatur ipsam
                                 pariatur, itaque laboriosam praesentium ullam accusantium.</p>
                             <div class="form-outline mb-4">
+                                <label class="form-label" for="form-email">Email</label>
                                 <input type="email" disabled id="form-email" class="form-control"
                                     value="<?php echo $userData['user_email'] ?>" />
-                                <label class="form-label" for="form-email">Email</label>
                             </div>
                             <form action="business/user-information.request.php" method="POST">
                                 <!-- 2 column grid layout with text inputs for the first and last names -->
                                 <div class="row mb-4">
                                     <div class="col">
                                         <div data-mdb-input-init class="form-outline">
+                                            <label class="form-label" for="form-first-name">Ad</label>
                                             <input type="text" id="form-first-name" class="form-control"
                                                 name="user_first_name"
                                                 value="<?php echo $userData['user_first_name'] ?>" />
-                                            <label class="form-label" for="form-first-name">Ad</label>
                                         </div>
                                     </div>
                                     <div class="col">
                                         <div data-mdb-input-init class="form-outline">
+                                            <label class="form-label" for="form-last-name">Soyad</label>
                                             <input type="text" id="form-last-name" class="form-control"
                                                 name="user_last_name"
                                                 value="<?php echo $userData['user_last_name'] ?>" />
-                                            <label class="form-label" for="form-last-name">Soyad</label>
                                         </div>
                                     </div>
                                 </div>
@@ -51,12 +57,15 @@
 
 
                                 <!-- Text input -->
-                                <div class="input-group flex-nowrap form-outline mb-4">
-                                    <span class="input-group-text" id="addon-wrapping">+90</span>
-                                    <input type="text" id="phone-number" class="form-control" name="user_phone_number"
-                                        value="<?php echo substr($userData['user_phone_number'], 4) ?>"
-                                        onkeydown="phoneNumberFormatter()" />
-                                    <label class="form-label" for="phone-number">Telefon</label>
+                                <div class="mb-3">
+                                    <label  class="form-label">Telefon</label>
+                                    <div class="input-group flex-nowrap form-outline mb-4">
+                                        <span class="input-group-text" id="addon-wrapping">+90</span>
+                                        <input type="text" id="phone-number" class="form-control"
+                                            name="user_phone_number"
+                                            value="<?php echo substr($userData['user_phone_number'], 4) ?>"
+                                            onkeydown="phoneNumberFormatter()" />
+                                    </div>
                                 </div>
                                 <script>
                                     function formatPhoneNumber(value) {
@@ -80,7 +89,7 @@
                                 </script>
                                 <!-- Submit button -->
                                 <button type="submit" name="update_user_information"
-                                    class="btn btn-primary btn-block mb-4">Güncelle</button>
+                                    class="btn primary-button primary-border w-100 mb-4">Güncelle</button>
                             </form>
                         </div>
                     </div>

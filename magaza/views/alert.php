@@ -4,6 +4,8 @@ if (isset($_SESSION['message']) && isset($_SESSION['message_type'])) {
     $message = $_SESSION['message'];
     $messageType = $_SESSION['message_type'];
 
+    echo $message.$messageType;
+
     unset($_SESSION['message']); // Mesajı temizle
     unset($_SESSION['message_type']); // Mesaj tipini temizle
 
@@ -11,5 +13,6 @@ if (isset($_SESSION['message']) && isset($_SESSION['message_type'])) {
             // Toastr bildirimi gösterme
             toastr.$messageType('$message');
           </script>";
+
 }
 ?>

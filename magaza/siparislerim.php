@@ -1,16 +1,22 @@
 <?php include 'views/header.php' ?>
 <?php include 'views/navbar.php' ?>
 <?php include 'business/my-orders.response.php' ?>
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
 
-<section class="container mt-4" id="home-products">
-    <ul id="breadcrumb">
-        <li><a href="/"><i class="fa-solid fa-house"></i></a></li>
-        <li><a href="./"><i class="fa-solid fa-shop"></i> Mağaza</a></li>
-        <li><a href="kullanici-bilgilerim"><i class="fa-solid fa-user"></i> Profil</a></li>
-        <li><a href="siparislerim"><i class="fa-solid fa-dolly"></i> Siparişlerim</a></li>
-    </ul>
+        <ol>
+            <li><a href="./">Anasayfa</a></li>
+            <li><a href="./kullanici-bilgilerim">Profil</a></li>
+            <li>Siparişlerim</li>
+        </ol>
+        <h2>Siparişlerim</h2>
+
+    </div>
+</section>
+<section class="container " id="home-products">
+
     <div class="row mt-4">
-        <div class="col-lg-3">
+        <div class="col-lg-3" data-aos="fade-right">
             <?php include 'views/profil-side-menu.php' ?>
         </div>
         <div class="col-lg-9 mt-4 mt-lg-0">
@@ -19,8 +25,9 @@
                 <div class="col-12 mb-3">
                     <div class="card">
                         <div class="card-body p-1 p-md-4 p-sm-2">
-                            <?php foreach ($orders as $order): ?>
-                                <div class="siparis-accordion-item mb-3">
+                            <?php foreach ($orders as $key => $order): ?>
+                                <div class="siparis-accordion-item mb-3" data-aos="fade-up"
+                                    data-aos-delay="<?php echo $key * 400 ?>">
                                     <button class="accordion">
                                         <div class="row justify-content-between align-items-center">
                                             <div class="col-6">
@@ -50,7 +57,7 @@
                                                         <?php endif; ?>
                                                     </div>
                                                     <div class="col-auto text-end">
-                                                        <b class="text-primary">
+                                                        <b>
                                                             <?php echo number_format($order['total_amount'], 2, ',', '.') ?>
                                                             TL
                                                         </b>
@@ -67,7 +74,7 @@
                                                 <div class="card-body p-3 p-md-4 p-sm-3">
                                                     <div class="row align-items-center">
                                                         <div class="col-auto">
-                                                            <img src="../assets/img/products/<?php echo $orderDetail['photo_name'] ?>"
+                                                            <img src="assets/img/products/<?php echo $orderDetail['photo_name'] ?>"
                                                                 class="img-fluid rounded-3" alt="Shopping item"
                                                                 style="width: 85px;">
                                                         </div>
@@ -96,14 +103,25 @@
                                                 </div>
                                             </div>
                                         <?php endforeach; ?>
-                                        <div
-                                            class="row ms-md-3 mb-md-3 me-md-3 ms-1 mb-2 me-1 mt-2 align-items-center justify-content-end">
-                                            <div class="col-auto">
-                                                <b>Kargo Takip No: </b><span>
-                                                    <?php echo $order['shipping_tracking_number'] ?>
-                                                </span>
+                                        <?php if ($order['order_status'] == "Kargoda"): ?>
+                                            <div
+                                                class="row ms-md-3 mb-md-3 me-md-3 ms-1 mb-2 me-1 mt-2 align-items-center justify-content-between">
+                                                <div class="col-auto">
+                                                    <form action="business/my-orders.request.php" method="POST">
+                                                        <input type="hidden" name="order_id"
+                                                            value="<?php echo $order['order_id'] ?>">
+                                                        <button type="submit" name="update_order_status"
+                                                            class="btn primary-button-2">Teslim Aldım</button>
+                                                    </form>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <b>Kargo Takip No: </b><span>
+                                                        <?php echo $order['shipping_tracking_number'] ?>
+                                                    </span>
+                                                </div>
                                             </div>
-                                        </div>
+                                        <?php endif; ?>
+
 
                                         <div
                                             class="row ms-md-3 mb-md-3 me-md-3 ms-2 mb-2 me-2 align-items-center justify-content-between">

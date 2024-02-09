@@ -1,88 +1,165 @@
-<a href="https://wa.me/<?php echo preg_replace('/[^\d\+]/','', $siteContactInformationData['site_tel']) ?>" style="z-index:10 !important;" >
+<?php include __DIR__ . '/../business/footer.response.php' ?>
+<a href="https://wa.me/<?php echo preg_replace('/[^\d\+]/','', $siteContactInformationData['site_tel']) ?>" style="z-index:10 !important;"  target="_blank">
   <div class="k-wp-btn">
-    <span class="position-absolute top-50 start-50 translate-middle"><i class="fa-brands fa-whatsapp"></i></span>
+    <span class="position-absolute top-50 start-50 translate-middle"><i class='bx bxl-whatsapp'></i></span>
   </div>
 </a>
-<!-- Footer-->
-<div class="bg-primary text-white mt-5">
-  <div class="container">
-    <footer class="row py-5 justify-content-between">
-      <div class="col-lg-5 col-md-12  mb-3">
-        <p class="text-white">© 2023
-          <?php echo $siteSettingsData['site_title'] ?>. Tüm Hakları Saklıdır.
-        </p>
-        <p class="text-white-50">Bu web sitesinde bulunan tüm içerikler, yazılar, görseller, grafikler, ses dosyaları ve
-          diğer materyaller Şirket Adı'na aittir ve telif hakkı koruması altındadır. Bu materyallerin izinsiz kullanımı
-          yasaktır.</p>
+<!-- ======= Footer ======= -->
+<footer id="footer">
+  <div class="footer-top">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-6 col-md-6">
+          <div class="footer-info">
+            <h3>İletişim</h3>
+            <p>
+              <?php echo $siteContactInformationData['site_address'] ?> <br>
+              <?php echo $siteContactInformationData['site_district'] ?> / <?php echo $siteContactInformationData['site_city'] ?><br><br>
+              <strong>Telefon:</strong> <?php echo $siteContactInformationData['site_tel'] ?><br>
+              <strong>E-Posta:</strong> <?php echo $siteContactInformationData['site_email'] ?><br>
+            </p>
+            <div class="social-links mt-3">
+              <a href="<?php echo $socialMediaFooter['facebook'] ?>" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="<?php echo $socialMediaFooter['instagram'] ?>" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="<?php echo $socialMediaFooter['linkedin'] ?>" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              <a href="<?php echo $socialMediaFooter['youtube'] ?>" class="youtube"><i class="bx bxl-youtube"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+          <div class="footer-info">
+            <h3>Mağazalarımız</h3>
+            <div class="row justify-content-center">
+              <div class="col-auto">
+                <ul>
+                  <li><a href="<?php echo $socialMediaFooter['hepsiburada'] ?>" target="_blank"><i class="bx bx-store me-2"></i> <span>
+                        <?php echo $socialMediaFooter['hepsiburada'] ?>
+                      </span></a></li>
+                  <li><a href="<?php echo $socialMediaFooter['n11'] ?>" target="_blank"><i class="bx bx-store me-2"></i> <span>
+                        <?php echo $socialMediaFooter['n11'] ?>
+                      </span></a></li>
+                  <li><a href="<?php echo $socialMediaFooter['sahibinden'] ?>" target="_blank"><i class="bx bx-store me-2"></i> <span>
+                        <?php echo $socialMediaFooter['sahibinden'] ?>
+                      </span></a></li>
+                  <li><a href="<?php echo $socialMediaFooter['trendyol'] ?>" target="_blank"><i class="bx bx-store me-2"></i> <span>
+                        <?php echo $socialMediaFooter['trendyol'] ?>
+                      </span></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6 footer-links">
+          <h4>Menü</h4>
+          <ul>
+            <li><i class="bx bx-chevron-right"></i> <a href="/">Anasayfa</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/magaza">Mağaza</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/hakkimizda">Hakkımızda</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/misyon-vizyon">Misyon ve Vizyon</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/belgelerimiz">Belgelerimiz</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/iletisim">İletişim</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6 footer-links">
+          <h4>Tiny House</h4>
+          <ul>
+            <?php foreach ($categoriesTypeTinyHouseFooter as $item): ?>
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="<?= base_url ?>/<?php echo $item['category_type'] ?>/<?php echo $item['category_url'] ?>">
+                  <?php echo $item['category_name'] ?>
+                </a>
+              </li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6 footer-links">
+          <h4>Tiny Ticari</h4>
+          <ul>
+            <?php foreach ($categoriesTypeTinyTicariFooter as $category): ?>
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="<?= base_url ?>/<?php echo $item['category_type'] ?>/<?php echo $item['category_url'] ?>">
+                  <?php echo $item['category_name'] ?>
+                </a>
+              </li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6 footer-links">
+          <h4>Karavan</h4>
+          <ul>
+            <?php foreach ($categoriesTypeKaravanFooter as $category): ?>
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="<?= base_url ?>/<?php echo $item['category_type'] ?>/<?php echo $item['category_url'] ?>">
+                  <?php echo $item['category_name'] ?>
+                </a>
+              </li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6 footer-links">
+          <h4>Römork</h4>
+          <ul>
+            <?php foreach ($categoriesTypeRomorkFooter as $category): ?>
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="<?= base_url ?>/<?php echo $item['category_type'] ?>/<?php echo $item['category_url'] ?>">
+                  <?php echo $item['category_name'] ?>
+                </a>
+              </li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6 footer-links">
+          <h4>Marin</h4>
+          <ul>
+            <?php foreach ($categoriesTypeMarinFooter as $category): ?>
+              <li><i class="bx bx-chevron-right"></i>
+                <a href="<?= base_url ?>/<?php echo $item['category_type'] ?>/<?php echo $item['category_url'] ?>">
+                  <?php echo $item['category_name'] ?>
+                </a>
+              </li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+
+
       </div>
-
-      <div class="col-lg-3 col-md-6 col-6 mb-3">
-        <h5>Menü</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="/" class="nav-link p-0 text-white-50">Anasayfa</a></li>
-          <li class="nav-item mb-2"><a href="magaza/" class="nav-link p-0 text-white-50">Mağaza</a></li>
-          <li class="nav-item mb-2"><a href="hakkimizda" class="nav-link p-0 text-white-50">Hakkımızda</a></li>
-          <li class="nav-item mb-2"><a href="misyon-vizyon" class="nav-link p-0 text-white-50">Misyon Vizyon</a></li>
-          <li class="nav-item mb-2"><a href="belgelerimiz" class="nav-link p-0 text-white-50">Belgelerimiz</a></li>
-        </ul>
-      </div>
-
-      <div class="col-lg-4 col-md-6 col-6 mb-3">
-        <h5>İletişim</h5>
-        <address class="text-white-50">
-          <?php echo $siteContactInformationData['site_address'] ?>
-        </address>
-        <span class="text-white-50">
-          <?php echo $siteContactInformationData['site_district'] ?> /
-          <?php echo $siteContactInformationData['site_city'] ?>
-        </span>
-        <br>
-        <span class="text-white-50">
-          <?php echo $siteContactInformationData['site_tel'] ?>
-        </span>
-      </div>
-
-
-
-    </footer>
+    </div>
   </div>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="assets/owl-carousel/js/owl.carousel.min.js"></script>
-<script>
-  $('.owl-carousel').owlCarousel({
-    loop: true,
-    margin: 10,
-    dots: false,
-    nav: true,
-    autoplay: true, // Otomatik oynatma
-    autoplayTimeout: 3000, // Otomatik oynatma süresi (milisaniye cinsinden)
-    responsive: {
-      0: {
-        items: 1
-      },
-      600: {
-        items: 3
-      },
-      1000: {
-        items: 4
-      },
-      1400: {
-        items: 5
-      }
-    }
-  });
-</script>
-<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://kit.fontawesome.com/a24a98907b.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.1.0/simple-lightbox.min.js"></script>
+  <div class="container">
+    <div class="copyright">
+       Copyright <strong> &copy; <span><?php echo $siteSettingsData['site_title'] ?></span></strong>. Tüm Hakları Saklıdır
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/day-multipurpose-html-template-for-free/ -->
+       <a href="https://www.linkedin.com/in/erdf15/" target="_blank" >Erdal Fidan</a> Tarafından Tasarlanmıştır.
+    </div>
+  </div>
+</footer><!-- End Footer -->
 
-<script>
-  // SimpleLightbox'u etkinleştirme
-  var gallery = new SimpleLightbox('.gallery a');
-</script>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+    class="bi bi-arrow-up-short"></i></a>
+<div id="preloader"></div>
+
+<!-- Vendor JS Files -->
+
+<script src="<?= base_url ?>/assets/vendor/aos/aos.js"></script>
+<script src="<?= base_url ?>/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?= base_url ?>/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="<?= base_url ?>/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="<?= base_url ?>/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="<?= base_url ?>/assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="<?= base_url ?>/assets/js/main.js"></script>
 
 </body>
 

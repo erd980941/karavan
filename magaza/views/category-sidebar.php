@@ -12,7 +12,7 @@ function hasChildren($categories, $parentId)
 
 function displayCategories($categories, $parentId = null)
 {
-    echo '<ul class="list-group list-group-light">';
+    echo $parentId==null?'<ul class="list-group list-group-light">':'';
     foreach ($categories as $cat) {
         if ($cat['parent_id'] == $parentId) {
             echo '<li class="list-group-item p-2">';
@@ -20,16 +20,16 @@ function displayCategories($categories, $parentId = null)
             echo '<span>' . $cat['category_title'] . '</span>';
 
             if (hasChildren($categories, $cat['category_id'])) {
-                echo '<a href="#collapse_' . $cat['category_id'] . '" class="btn btn-primary btn-sm float-end" style="padding:0.1rem 0.7rem" data-bs-toggle="collapse">';               
-                echo '<i class="fas fa-plus" data-open="false"></i>';
+                echo '<a href="#collapse_' . $cat['category_id'] . '" class="btn  btn-sm float-end"  data-bs-toggle="collapse">';               
+                echo '<i class="bx bx-plus" data-open="false" ></i>';
                 echo '</a>';
 
                 echo '<ul class="submenu collapse" id="collapse_' . $cat['category_id'] . '" data-category-id="' . $cat['category_id'] . '">';
                 displayCategories($categories, $cat['category_id']); // Recursive call for subcategories
                 echo '</ul>';
             } else {
-                echo '<a href="#collapse_' . $cat['category_id'] . '" class="btn btn-primary btn-sm float-end" style="padding:0.1rem 0.7rem;display:none;" data-bs-toggle="collapse">';               
-                echo '<i class="fas fa-plus" data-open="false"></i>';
+                echo '<a href="#collapse_' . $cat['category_id'] . '" class="btn  btn-sm float-end" style="display:none;" data-bs-toggle="collapse">';               
+                echo '<i class="bx bx-plus" data-open="false" ></i>';
                 echo '</a>';
                 // Eğer alt kategori yoksa, burada bir <ul> etiketi ekleyebilirsiniz.
                 echo '<ul class="submenu collapse" id="collapse_' . $cat['category_id'] . '" data-category-id="' . $cat['category_id'] . '">';
@@ -40,7 +40,7 @@ function displayCategories($categories, $parentId = null)
             echo '</li>';
         }
     }
-    echo '</ul>';
+    echo $parentId==null?'</ul>':'';
 }
 displayCategories($categories);
 ?>
@@ -93,12 +93,12 @@ function getParentCategories(element) {
                 const isOpen = icon.getAttribute('data-open');
                 
                 if (isOpen === 'false') {
-                    icon.classList.remove('fa-plus');
-                    icon.classList.add('fa-minus');
+                    icon.classList.remove('bx-plus');
+                    icon.classList.add('bx-minus');
                     icon.setAttribute('data-open', 'true');
                 } else {
-                    icon.classList.remove('fa-minus');
-                    icon.classList.add('fa-plus');
+                    icon.classList.remove('bx-minus');
+                    icon.classList.add('bx-plus');
                     icon.setAttribute('data-open', 'false');
                 }
             });
@@ -112,12 +112,12 @@ function getParentCategories(element) {
         const icon = link.previousElementSibling.querySelector('i');
 
         if (isOpen) {
-            icon.classList.remove('fa-plus');
-            icon.classList.add('fa-minus');
+            icon.classList.remove('bx-plus');
+            icon.classList.add('bx-minus');
             icon.setAttribute('data-open', 'true');
         } else {
-            icon.classList.add('fa-plus');
-            icon.classList.remove('fa-minus');
+            icon.classList.add('bx-plus');
+            icon.classList.remove('bx-minus');
             icon.setAttribute('data-open', 'false');
         }
     });

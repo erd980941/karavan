@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__.'/../../data_access/db-connector.php';
+require_once __DIR__ . '/../../data_access/db-connector.php';
 
 class Product
 {
@@ -15,7 +15,8 @@ class Product
     {
         $query = "SELECT p.*, ph.photo_name FROM products p
                         LEFT JOIN product_photos ph ON p.main_photo_id = ph.photo_id
-                        ORDER BY p.product_id DESC";
+                        WHERE p.product_status='1'
+                        ORDER BY p.product_id DESC ";
 
         $statement = $this->db->prepare($query);
         $statement->execute();
@@ -23,23 +24,27 @@ class Product
     }
     public function getProductById($productId)
     {
-        $query = "SELECT * FROM products p WHERE product_id=:product_id LIMIT 1";
+        $query = "SELECT p.* FROM products p WHERE p.product_id=:product_id AND p.product_status='1' LIMIT 1 ";
         $statement = $this->db->prepare($query);
         $statement->bindParam(":product_id", $productId, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
-    public function getProductsByFeatured(){
-        $query="SELECT p.*,pp.photo_name FROM products p 
+    public function getProductsByFeatured()
+    {
+        $query = "SELECT p.*,pp.photo_name,c.category_title FROM products p 
                 LEFT JOIN product_photos pp ON p.main_photo_id=pp.photo_id
-                WHERE p.product_featured='1' ORDER BY created_at DESC";
+                INNER JOIN categories c ON p.category_id=c.category_id
+                WHERE p.product_featured='1' AND p.product_status='1' ORDER BY created_at DESC";
         $statement = $this->db->prepare($query);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getLastAddedProducts(){
-        $query="SELECT p.*,pp.photo_name FROM products p 
+    public function getLastAddedProducts()
+    {
+        $query = "SELECT p.*,pp.photo_name FROM products p 
                 LEFT JOIN product_photos pp ON p.main_photo_id=pp.photo_id
+                WHERE p.product_status='1'
                 ORDER BY created_at DESC LIMIT 8 ";
         $statement = $this->db->prepare($query);
         $statement->execute();
@@ -50,7 +55,7 @@ class Product
         $query = "SELECT p.*, pp.photo_name 
                 FROM products p 
                 LEFT JOIN product_photos pp ON p.main_photo_id = pp.photo_id 
-                WHERE p.category_id = :category_id 
+                WHERE p.category_id = :category_id AND WHERE p.product_status='1'
                 ORDER BY p.product_id DESC";
         $statement = $this->db->prepare($query);
         $statement->bindParam(":category_id", $categoryId, PDO::PARAM_INT);
@@ -74,7 +79,7 @@ class Product
         $query = "SELECT p.*, ph.photo_name 
                     FROM products p 
                     LEFT JOIN product_photos ph ON p.main_photo_id = ph.photo_id 
-                    WHERE p.category_id IN (";
+                    WHERE p.product_status='1' AND p.category_id IN (";
 
         $placeholders = implode(',', array_fill(0, count($categoryIds), '?'));
 
@@ -94,27 +99,75 @@ class Product
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function searchProducts($search_query){
+    public function searchProducts($search_query)
+    {
 
-        $search_query = "%" . $search_query . "%"; 
-        $query="SELECT p.*,ph.photo_name FROM products p 
+        $search_query = "%" . $search_query . "%";
+        $query = "SELECT p.*,ph.photo_name FROM products p 
                 LEFT JOIN product_photos ph ON p.main_photo_id = ph.photo_id
-                WHERE product_name LIKE :search_query";
+                WHERE product_name LIKE :search_query AND p.product_status='1' ";
         $statement = $this->db->prepare($query);
-        $statement->bindParam(':search_query',$search_query,PDO::PARAM_STR);
+        $statement->bindParam(':search_query', $search_query, PDO::PARAM_STR);
         $statement->execute();
         $products = $statement->fetchAll(PDO::FETCH_ASSOC);
-    
+
         return $products;
     }
 
-    public function decrementProductQuantity($productId, $quantityToDecrement){
+    public function getProductsByCategoryAndSubcategoriesWithFilters($categoryId, $minPrice, $maxPrice)
+    {
+        $categories = $this->getNestedCategories($categoryId);
+        $categoryIds = array_column($categories, 'category_id');
+        $categoryIds[] = $categoryId;
+
+        foreach ($categories as $category) {
+            $subCategories = $this->getNestedCategories($category['category_id']);
+            foreach ($subCategories as $subCategory) {
+                $categoryIds[] = $subCategory['category_id'];
+            }
+        }
+
+        $query = "SELECT p.*, ph.photo_name 
+                  FROM products p 
+                  LEFT JOIN product_photos ph ON p.main_photo_id = ph.photo_id 
+                  WHERE p.product_status='1' AND p.category_id IN (";
+
+        $placeholders = implode(',', array_fill(0, count($categoryIds), '?'));
+
+        $query .= $placeholders . ")";
+
+        // Filtreleme parametrelerini ekleyelim
+        if ($minPrice !== null && $maxPrice !== null) {
+            $query .= " AND p.product_price BETWEEN :min_price AND :max_price";
+        }
+
+        $query .= " ORDER BY p.product_id DESC";
+
+        $statement = $this->db->prepare($query);
+
+        // Kategorileri bind etme
+        foreach ($categoryIds as $index => $categoryId) {
+            $statement->bindValue($index + 1, $categoryId, PDO::PARAM_INT);
+        }
+
+        // Filtreleme parametrelerini bind etme
+        if ($minPrice !== null && $maxPrice !== null) {
+            $statement->bindParam(':min_price', $minPrice, PDO::PARAM_INT);
+            $statement->bindParam(':max_price', $maxPrice, PDO::PARAM_INT);
+        }
+
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function decrementProductQuantity($productId, $quantityToDecrement)
+    {
         $query = 'SELECT product_quantity FROM products WHERE product_id = :product_id';
         $statement = $this->db->prepare($query);
         $statement->bindParam(':product_id', $productId, PDO::PARAM_INT);
         $statement->execute();
         $product = $statement->fetch(PDO::FETCH_ASSOC);
-    
+
         if ($product['product_quantity'] >= $quantityToDecrement) {
             $query = 'UPDATE products SET product_quantity = product_quantity - :quantityToDecrement WHERE product_id = :product_id';
             $statement = $this->db->prepare($query);

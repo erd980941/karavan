@@ -1,118 +1,108 @@
-<div class="top-bar">
-    <div class="container">
-        <div class="row justify-content-between align-items-center py-2">
-            <div class="col-auto">
-                <p class="m-0">Mağazaya Hoşgeldiniz</p>
-            </div>
-            <div class="col-auto">
-                <a href="#">N11</a>
-                <a href="#">Sahibinden</a>
-                <a href="#">Hepsiburada</a>
-            </div>
+<?php include __DIR__ . '/../business/navbar.response.php' ?>
+<!-- ======= Top Bar ======= -->
+<section id="topbar" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="contact-info d-flex align-items-center">
+            <a href="mailto:<?php echo $siteContactInformationData['site_email'] ?>"><i class="bi bi-envelope-fill"></i>
+                <?php echo $siteContactInformationData['site_email'] ?>
+            </a>
+            <a href="tel:<?php echo $siteContactInformationData['site_tel'] ?>"><i
+                    class="bi bi-phone-fill phone-icon"></i>
+                <?php echo $siteContactInformationData['site_tel'] ?>
+            </a>
+        </div>
+        <div class="social-links d-none d-md-block">
+            <a href="<?php echo $socialMediaData['facebook'] ?>" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="<?php echo $socialMediaData['instagram'] ?>" class="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="<?php echo $socialMediaData['linkedin'] ?>" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            <a href="<?php echo $socialMediaData['youtube'] ?>" class="youtube"><i class="bi bi-youtube"></i></i></a>
         </div>
     </div>
-</div>
-<header>
-    <div class="p-3 text-center bg-white">
-        <div class="container">
-            <div class="row justify-content-between align-items-center gy-3">
-                <div class="col-lg-2 col-sm-4 col-4">
-                    <a href="./" class="float-start">
-                        <img src="../assets/img/<?php echo $siteLogoPath ?>" height="75" alt="">
-                    </a>
-                </div>
+</section>
+<header id="header" class=" align-items-center nav-middle-bar">
+    <div class="container  align-items-center justify-content-between">
+        <div class="row justify-content-between align-items-center gy-3">
+            <div class="col-lg-2 col-sm-4 col-4">
+                <a href="/"><img src="<?= base_url ?>/assets/img/<?php echo $siteLogoPath ?>" width="80"></a>
 
-
-                <div class="order-lg-last col-auto text-end">
-                    <div class="d-flex float-end">
-                        <?php if ($loggedIn): ?>
-                            <a href="kullanici-bilgilerim"
-                                class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
-                                <i class="fa-solid fa-user-gear m-1 me-md-2"></i>
-                                <p class="d-none d-md-block mb-0">Profil</p>
-                            </a>
-                            <a href="sepet" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
-                                <i class="fas fa-shopping-cart m-1 me-md-2"></i>
-                                <p class="d-none d-md-block mb-0">Sepetim</p>
-                            </a>
-                            <a href="business/logout.php"
-                                class="border rounded py-1 px-3 nav-link d-flex align-items-center">
-                                <i class="fa-solid fa-right-from-bracket me-1"></i>
-                                <p class="d-none d-md-block mb-0">Çıkış Yap</p>
-                            </a>
-                        <?php else: ?>
-                            <a href="giris-yap" class=" border rounded py-1 px-3 nav-link d-flex align-items-center k-navbar-a">
-                                <i class="fa-solid fa-right-to-bracket m-1 me-md-2"></i>
-                                <p class="d-none d-md-block mb-0">Giriş Yap</p>
-                            </a>
-                            <a href="kayit-ol" class="ms-1 border rounded py-1 px-3 nav-link d-flex align-items-center k-navbar-a">
-                                <i class="fa-solid fa-user-plus  m-1 me-md-2"></i>
-                                <p class="d-none d-md-block mb-0">Kayıt Ol</p>
-                            </a>
+            </div>
+            <div class="order-lg-last col-auto text-end">
+                <?php if ($loggedIn): ?>
+                    <a href="sepet" type="button" class="btn btn-primary position-relative navbar-end-button me-3">
+                        <i class="bi bi-cart2"></i>
+                        <?php if ($cartCount > 0): ?>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <?php echo $cartCount; ?>
+                            </span>
                         <?php endif; ?>
+                    </a>
+                <?php endif; ?>
 
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary dropdown-toggle navbar-end-button"
+                        data-bs-toggle="dropdown" style="height:44.2px;display:flex;align-items:center;">
+                        <i class='bx bx-user'></i>
+                    </button>
+                    <?php if ($loggedIn): ?>
+                        <ul class="dropdown-menu dropdown-menu-lg-end custom-navbar-dropdown">
+                            <li><a class="dropdown-item" href="kullanici-bilgilerim">Kullanıcı Bilgilerim</a></li>
+                            <li><a class="dropdown-item" href="sifre-degistir">Şifre Değiştir</a></li>
+                            <li><a class="dropdown-item" href="siparislerim">Siparişlerim</a></li>
+                            <li><a class="dropdown-item" href="odeme-bekleyen">Ödeme Bekleyen Siparişlerim</a></li>
+                            <li><a class="dropdown-item" href="sepet-onay">Onaylanan Sepet</a></li>
+                            <li><a class="dropdown-item" href="adreslerim">Adreslerim</a></li>
+                            <li><a class="dropdown-item" href="business/logout.php">Çıkış Yap</a></li>
+                        </ul>
+                    <?php else: ?>
+                        <ul class="dropdown-menu dropdown-menu-lg-end custom-navbar-dropdown">
+                            <li><a class="dropdown-item" href="giris-yap">Giriş Yap</a></li>
+                            <li><a class="dropdown-item" href="kayit-ol">Kayıt Ol</a></li>
+                        </ul>
+                    <?php endif; ?>
+                </div>
 
-                    </div>
-                </div>
-                <div class="col-lg-5 col-md-12 col-12">
-                    <form action="urunler" method="GET">
-                        <div class="input-group float-center">
-                            <div class="form-outline">
-                                <input type="search" id="form1" class="form-control" name="search_query" required>
-                                <label class="form-label" for="form1" style="margin-left: 0px;">Ürün Ara..</label>
-                                <div class="form-notch">
-                                    <div class="form-notch-leading" style="width: 9px;"></div>
-                                    <div class="form-notch-middle" style="width: 47.2px;"></div>
-                                    <div class="form-notch-trailing"></div>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary shadow-0">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
             </div>
+            <div class="col-lg-5 col-md-12 col-12 align-items-center">
+                <form action="urunler" method="GET">
+                    <div class="input-group align-items-center">
+                        <input type="text" class="form-control navbar-search-input" placeholder="Ürün Ara.."
+                            name="search_query" required>
+                        <button class="btn btn-outline-secondary navbar-search-button" type="submit">
+                            <i class='bx bx-search-alt me-2 ms-2'></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
 
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary k-navbar py-3">
-        <!-- Container wrapper -->
-        <div class="container justify-content-center justify-content-md-between">
-            <!-- Toggle button -->
-            <button class="navbar-toggler collapsed" type="button" data-mdb-toggle="collapse"
-                data-mdb-target="#navbarLeftAlignExample" aria-controls="navbarLeftAlignExample" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-            </button>
+    </div>
+</header>
+<header id="header" class="d-flex align-items-center nav-bottom-bar d">
+    <div class="container text-end">
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li class="dropdown me-0 me-lg-3 category-menu">
+                    <a href="#"><b>Kategoriler</b> <i class="bi bi-chevron-down"></i>
+                    </a>
+                    <?php include __DIR__.'/category-navbar.php' ?>
+                </li>
+                <li><a class="nav-link scrollto" href="/">Anasayfa</a></li>
+                <li><a class="nav-link scrollto" href="/magaza/">Mağaza</a></li>
+                <li class="dropdown"><a href="#"><span>Kurumsal</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="/hakkimizda">Hakkımızda</a></li>
+                        <li><a href="/misyon-vizyon">Misyon Vizyon</a></li>
+                        <li><a href="/belgelerimiz">Belgelerimiz</a></li>
+                    </ul>
+                </li>
+                <?php include __DIR__ . '/../../views/k-category-nav-list.php' ?>
+                <li><a class="nav-link scrollto" href="/iletisim">İletişim</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle navbar-toggle-icon ms-auto"></i>
+        </nav><!-- .navbar -->
 
-            <!-- Collapsible wrapper -->
-            <div class="collapse navbar-collapse" id="navbarLeftAlignExample">
-                <!-- Left links -->
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Anasayfa</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./">Mağaza</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="urunler">Ürünler</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Projects</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Menu item</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Menu name</a>
-                    </li>
-                </ul>
-                <!-- Left links -->
-            </div>
-        </div>
-        <!-- Container wrapper -->
-    </nav>
+    </div>
 </header>

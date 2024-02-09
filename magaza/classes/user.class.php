@@ -46,8 +46,9 @@ class User
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
+
     public function getUserInformation($userId,$userEmail){
-        $query='SELECT user_email, user_first_name, user_last_name, user_phone_number, user_status FROM users WHERE user_id=:user_id AND user_email=:user_email LIMIT 1';
+        $query='SELECT user_id,user_email, user_first_name, user_last_name, user_phone_number, user_status FROM users WHERE user_id=:user_id AND user_email=:user_email LIMIT 1';
         $statement=$this->db->prepare($query);
         $statement->bindParam(':user_id',$userId,PDO::PARAM_INT);
         $statement->bindParam(':user_email',$userEmail,PDO::PARAM_STR);
@@ -69,6 +70,29 @@ class User
         $query = "UPDATE users SET email_verified = '1' WHERE user_id = :user_id";
         $statement = $this->db->prepare($query);
         $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        return $statement->execute();
+    }
+
+    public function getUserPassword($userId,$userEmail){
+        $query='SELECT user_password FROM users WHERE user_id=:user_id AND user_email=:user_email LIMIT 1';
+        $statement=$this->db->prepare($query);
+        $statement->bindParam(':user_id',$userId,PDO::PARAM_INT);
+        $statement->bindParam(':user_email',$userEmail,PDO::PARAM_STR);
+        $statement->execute();
+        $userPassword=$statement->fetch(PDO::FETCH_ASSOC);
+        return $userPassword['user_password'];
+    }
+
+    public function changePassword($userPasswordData) {
+    
+        $hashedNewPassword = password_hash($userPasswordData['new_password'], PASSWORD_DEFAULT);
+    
+        $query = "UPDATE users SET user_password = :new_password WHERE user_id = :user_id AND user_email = :user_email";
+        $statement = $this->db->prepare($query);
+        $statement->bindParam(':new_password', $hashedNewPassword, PDO::PARAM_STR);
+        $statement->bindParam(':user_id', $userPasswordData['user_id'], PDO::PARAM_INT);
+        $statement->bindParam(':user_email', $userPasswordData['user_email'], PDO::PARAM_STR);
+    
         return $statement->execute();
     }
 
