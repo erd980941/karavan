@@ -12,6 +12,9 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php
 
+RewriteRule ^([^/]+)/([^/]+)$ kategori-urunler.php?category_type=$1&category_url=$2 [L]
+RewriteRule ^([^/]+)/([^/]+)/([^/]+)$ urun-detay.php?category_type=$1&category_url=$2&product_url=$3 [L]
+
 <Files "/config/db.php">
     Order Allow,Deny
     Deny from all

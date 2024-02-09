@@ -9,24 +9,23 @@ require_once __DIR__ . '/../helpers/url-function.php';
 
 if ($loggedIn) {
 
-    if (isset($_SESSION['order_id'])) {
+    if (isset($_POST['order_id'])) {
 
         $orderModel = new Order();
         $orderDetailModel = new OrderDetail();
         $bankAccountModel = new BankAccount();
         $userId = htmlspecialchars($_SESSION['user_id']);
-        $orderId = htmlspecialchars($_SESSION['order_id']);
+        $orderId = htmlspecialchars($_POST['order_id']);
 
         $order = $orderModel->getUnpaidOrdersByOrderId($userId, $orderId);
 
-        unset($_SESSION['order_id']);
 
         if (empty($order)) {
             ErrorHandler::showMessageAndRedirect("Sipariş Bulunamadı.", "./odeme-bekleyen", 'error');
             exit();
         }
 
-        $bankAccount = $bankAccountModel->getBankAccount();
+        $bankAccounts = $bankAccountModel->getBankAccount();
 
         //    $orderDetails=[];
         //    foreach($orders as $order){

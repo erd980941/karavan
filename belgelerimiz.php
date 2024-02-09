@@ -1,11 +1,26 @@
-<?php include __DIR__.'/views/header.php' ?>
-<?php include __DIR__.'/views/fixed-navbar.php' ?>
+<?php include 'views/header.php' ?>
+<?php include 'views/navbar.php' ?>
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
 
-<div class="k-nav-image">
-    <!-- <img class="img-fluid" src="assets/img/karavan-13.jpg" alt=""> -->
-    <h1 class="position-absolute top-50 start-50 translate-middle">Belgelerimiz</h1>
-</div>
-<div class="container mt-5">
-    <?php include __DIR__.'/views/our-document-page.php' ?>
-</div>
-<?php include __DIR__.'/views/footer.php' ?>
+        <ol>
+            <li><a href="./">Anasayfa</a></li>
+            <li>Belgelerimiz</li>
+        </ol>
+        <h2>Belgelerimiz</h2>
+
+    </div>
+</section>
+<!-- ======= Services Section ======= -->
+<section id="services" class="services">
+    <div class="container">
+
+        <?php include 'views/our-document.php' ?>
+
+    </div>
+</section>
+<!-- End Services Section -->
+
+</main><!-- End #main -->
+<?php include 'views/footer.php' ?>

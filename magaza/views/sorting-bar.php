@@ -4,17 +4,18 @@
             <h3>Ürünler</h3>
         </div>
         <div class="col-md-4 col-auto">
-            <form action="">
-                <select class="form-select">
-                    <option selected>Sıralama..</option>
-                    <option value="1">Önerilen</option>
-                    <option value="2">A - Z</option>
-                    <option value="3">Z - A</option>
-                    <option value="3">Artan Fiyat</option>
-                    <option value="3">Azalan Fiyat</option>
+            <form id="sortingForm">
+                <select class="form-select" id="sortingSelect" name="sorting">
+                    <option selected disabled>Sıralama..</option>
+                    <option value="recommended">Önerilen</option>
+                    <option value="name_asc">A - Z</option>
+                    <option value="name_desc">Z - A</option>
+                    <option value="price_asc">Artan Fiyat</option>
+                    <option value="price_desc">Azalan Fiyat</option>
                 </select>
             </form>
         </div>
     </div>
-
 </div>
+
+

@@ -1,12 +1,24 @@
 <?php include 'views/header.php' ?>
-<?php include 'views/fixed-navbar.php' ?>
+<?php include 'views/navbar.php' ?>
+<!-- ======= Breadcrumbs ======= -->
+<section id="breadcrumbs" class="breadcrumbs">
+    <div class="container">
 
-<div class="k-nav-image">
-    <!-- <img class="img-fluid" src="assets/img/karavan-13.jpg" alt=""> -->
-    <h1 class="position-absolute top-50 start-50 translate-middle">Hakkımızda</h1>
-</div>
-<div class="container mt-5">
-    <?php include 'views/about-us-page.php' ?>
-</div>
+        <ol>
+            <li><a href="./">Anasayfa</a></li>
+            <li>Hakkımızda</li>
+        </ol>
+        <h2>Hakkımızda</h2>
 
+    </div>
+</section>
+<!-- ======= About Section ======= -->
+<section id="about" class="about">
+    <div class="container" data-aos="zoom-in">
+        <?php include 'views/about-us.php' ?>
+
+    </div>
+</section><!-- End About Section -->
+
+</main><!-- End #main -->
 <?php include 'views/footer.php' ?>

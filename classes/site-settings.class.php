@@ -40,6 +40,15 @@ class SiteSettings
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
+    //--------------------- Social Media ---------------------
+    
+    public function getSocialMedia()
+    {
+        $query = "SELECT * FROM social_media WHERE social_media_id = 0";
+        $statement = $this->db->query($query);
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
 
     //--------------------- LOGO ---------------------
     public function getSiteLogo()

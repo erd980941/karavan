@@ -39,6 +39,26 @@ class Order
         }
     }
 
+    public function updateOrderStatus($orderData){
+        $query = "UPDATE orders SET order_status=:order_status WHERE user_id=:user_id AND order_id=:order_id AND order_status='Kargoda'";
+        $statement = $this->db->prepare($query);
+        $statement->bindParam(':user_id', $orderData['user_id'], PDO::PARAM_INT);
+        $statement->bindParam(':order_id', $orderData['order_id'], PDO::PARAM_INT);
+        $statement->bindParam(':order_status', $orderData['order_status'], PDO::PARAM_STR);
+        $result = $statement->execute();
+    
+        if ($result) {
+            if ($statement->rowCount() > 0) {
+                return true; // En az bir satır güncellendi.
+            } else {
+                return false; // Hiçbir satır güncellenmedi.
+            }
+        } else {
+            return false; // Sorgu başarısız.
+        }
+    }
+    
+
     public function getUnpaidOrders($userId){
         $query="SELECT * FROM orders WHERE user_id=:user_id AND  payment_status='0' ORDER BY order_date DESC";
         $statement=$this->db->prepare($query);

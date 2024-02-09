@@ -1,46 +1,49 @@
-<div class="socialbar">
-    <div class="container h-100">
-    <div class=" row h-100 align-items-center justify-content-between">
-        <div class="col-auto">
-            <a href="tel:051412321"><span><i class="fa-solid fa-phone me-2"></i> +90 541 520 44 41</span></a>
-            <a href="mail:erdal@gmail.com"><span class="ms-4" ><i class="fa-regular fa-envelope me-2"></i> erdal318@gmail.com</span></a>
-        </div>
-        <div class="col-auto">
-            <a href="#"><span class="" ><i class="fa-brands fa-facebook-f"></i></span></a>
-            <a href="#"><span class="ms-4" ><i class="fa-brands fa-instagram"></i></span></a>
-            <a href="#"><span class="ms-4" ><i class="fa-brands fa-twitter"></i></span></a>
-            
-        </div>
-    </div>
-    </div>
-</div>
 
-<nav class=" navbar navbar-expand-lg navbar-light fixed-top py-3 " style="top:60px;padding:6px 0 !important;" id="mainNav">
-    <div class="container ">
-        <a class="navbar-brand" href="./">
-            <img src="assets/img/<?php echo $siteLogoPath ?>" width="100" alt="">
-        </a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-            aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                <li class="nav-item"><a class="nav-link" href="./">Anasayfa</a></li>
-                <li class="nav-item"><a class="nav-link" href="magaza">Mağaza</a></li>
-                <li class="nav-item"><a class="nav-link" href="magaza">Mağaza</a></li>
-                <li class="nav-item"><a class="nav-link" href="hakkimizda">Kurumsal</a></li>
-                <li class="nav-item"><a class="nav-link" href="misyon-vizyon">Misyonumuz ve Vizyonumuz</a></li>
-                <li class="nav-item"><a class="nav-link" href="belgelerimiz">Belgelerimiz</a></li>
-            </ul>
+<!-- ======= Top Bar ======= -->
+<section id="topbar" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="contact-info d-flex align-items-center">
+            <a href="mailto:<?php echo $siteContactInformationData['site_email'] ?>"><i class="bi bi-envelope-fill"></i>
+                <?php echo $siteContactInformationData['site_email'] ?>
+            </a>
+            <a href="tel:<?php echo $siteContactInformationData['site_tel'] ?>"><i
+                    class="bi bi-phone-fill phone-icon"></i>
+                <?php echo $siteContactInformationData['site_tel'] ?>
+            </a>
+        </div>
+        <div class="social-links d-none d-md-block">
+            <a href="<?php echo $socialMediaData['facebook'] ?>" class="facebook"><i class="bi bi-facebook"></i></a>
+            <a href="<?php echo $socialMediaData['instagram'] ?>" class="instagram"><i class="bi bi-instagram"></i></a>
+            <a href="<?php echo $socialMediaData['linkedin'] ?>" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+            <a href="<?php echo $socialMediaData['youtube'] ?>" class="youtube"><i class="bi bi-youtube"></i></i></a>
         </div>
     </div>
-</nav>
-<script>
-  window.addEventListener('scroll', function() {
-  var navbar = document.getElementById('mainNav'); // Navbar'ın ID'sini buraya ekleyin
-  var scrollDistance = window.scrollY; // Sayfa üzerindeki scroll miktarını alın
-  
-  var newTop = Math.max(0, 60 - scrollDistance); // Yeni top değerini hesapla, en az 0 olacak şekilde
-  navbar.style.top = newTop + 'px'; // Yeni top değerini ayarla
-});
-</script>
+</section>
+
+<!-- ======= Header ======= -->
+<header id="header" class="d-flex align-items-center ">
+    <div class="container d-flex align-items-center justify-content-between">
+
+        <a href="<?= base_url ?>"><img src="<?=base_url?>/assets/img/<?php echo $siteLogoPath ?>" width="80"></a>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link scrollto" href="<?= base_url ?>">Anasayfa</a></li>
+                <li><a class="nav-link scrollto" href="<?= base_url ?>/magaza">Mağaza</a></li>
+                <li class="dropdown"><a href="#"><span>Kurumsal</span> <i class="bi bi-chevron-down"></i></a>
+                    <ul>
+                        <li><a href="<?= base_url ?>/hakkimizda">Hakkımızda</a></li>
+                        <li><a href="<?= base_url ?>/misyon-vizyon">Misyon Vizyon</a></li>
+                        <li><a href="<?= base_url ?>/belgelerimiz">Belgelerimiz</a></li>
+                    </ul>
+                </li>
+                <?php include __DIR__.'/k-category-nav-list.php' ?>
+                <li><a class="nav-link scrollto" href="<?= base_url ?>/iletisim">İletişim</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle navbar-toggle-icon"></i>
+        </nav><!-- .navbar -->
+
+    </div>
+</header><!-- End Header -->
